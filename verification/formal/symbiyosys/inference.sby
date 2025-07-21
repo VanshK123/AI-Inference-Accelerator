@@ -1,0 +1,15 @@
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -sv ../../rtl/top_level.sv ../../rtl/mac_array.sv ../../rtl/memory_subsystem.sv
+prep -top top_level
+
+[files]
+../../rtl/top_level.sv
+../../rtl/mac_array.sv
+../../rtl/memory_subsystem.sv
+mac_assertions.sv
