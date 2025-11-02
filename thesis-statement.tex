@@ -1,0 +1,137 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{\bfseries Project Proposal:\\Domain-Specific AI Inference Accelerator}
+\author{Vansh Khanna}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This proposal outlines the design, implementation, and delivery plan for a high-performance, energy-efficient Domain-Specific AI Inference Accelerator. Leveraging parameterizable MAC arrays, hierarchical memory architecture, and industry-standard interfaces (AXI4-Stream, PCIe Gen4), the project targets sub-2 µs latency on ResNet-50 inference with >4 TOPS/W efficiency. A rigorous verification strategy (UVM, formal), CI/CD pipeline, and cross-functional governance framework will ensure on-time, on-budget delivery of a production-ready IP suitable for FPGA prototyping and 5 nm ASIC tape-out.
+\end{abstract}
+
+\section*{Executive Summary}
+In simple terms, this Domain-Specific AI Inference Accelerator delivers lightning-fast, energy-efficient AI inference with turnkey hardware/software integration to accelerate time-to-market and reduce TCO. Technically, the solution employs a parameterizable 32×32 MAC array with INT8/FLOAT16 mixed-precision, a hierarchical memory subsystem featuring dual-port BRAM scratchpads and HBM/DDR abstraction, and scatter-gather DMA over AXI4-Stream and PCIe Gen4×4, all validated through a UVM/formal-driven CI/CD pipeline; it targets sub-2 µs per ResNet-50 inference at $\geq$5,000 FPS and >4 TOPS/W efficiency, meets stringent KPIs, and delivers FPGA bitstreams, Linux kernel modules, user-space SDKs, and 5 nm ASIC tape-out readiness within 30 weeks under a zero-escape quality-assurance and cross-functional governance framework to maximize ROI.
+
+
+\section{Background \& Motivation}
+Contemporary AI inference demands microsecond-scale latencies and stringent power budgets, particularly in autonomous systems and cloud datacenters. General-purpose GPUs fail to meet these constraints, resulting in:
+\begin{enumerate}
+  \item \textbf{Suboptimal Latency}: Round-trip delays exceeding application SLAs.
+  \item \textbf{High Energy Costs}: Elevated TCO due to power-hungry architectures.
+  \item \textbf{Integration Complexity}: Lack of turnkey HW/SW stacks for heterogeneous deployment.
+\end{enumerate}
+Our domain-specific accelerator addresses these pain points via tailored datapaths, optimized memory hierarchies, and a full-stack delivery model.
+
+\section{Project Objectives}
+\begin{itemize}
+  \item \textbf{Functional Accuracy}: 100\% layer-by-layer equivalence to floating-point software baseline.
+  \item \textbf{Latency Target}: $\leq$2~$\mu$s per inference on ResNet-50 @ batch=1.
+\item \textbf{Efficiency Goal}: $\geq$4 TOPS/W sustained.
+  \item \textbf{Integration Deliverables}: 
+    \begin{itemize}
+      \item FPGA bitstream + board bring-up guide.
+      \item Linux kernel driver + user-land SDK with sample applications.
+      \item CI/CD pipeline with automated regression (<30 min runtime).
+    \end{itemize}
+\end{itemize}
+
+\section{Technical Approach}
+\subsection*{Datapath \& Precision}
+We will architect a scalable MAC array (e.g. 32×32) with mixed-precision support (INT8/INT16/FLOAT16). On-chip BRAM scratchpads and dual-ported FIFOs will minimize external memory transfers.
+
+\subsection*{Memory Subsystem}
+A hierarchical memory design featuring:
+\begin{itemize}
+  \item \textbf{L1 Scratchpad}: Ultra-low-latency dual-port BRAM banks.
+  \item \textbf{DMA Engine}: Scatter-gather transfers via AXI-DMA.
+  \item \textbf{HBM/DDR Interface}: Abstraction layer for target platform.
+\end{itemize}
+
+\subsection*{Control \& Sequencing}
+A microcoded sequencer will orchestrate layer operations, supporting dynamic workload repartitioning and QoS policies for multi-tenant inference.
+
+\subsection*{Host Interface}
+AXI4-Lite for control-plane registers, AXI4-Stream for data-plane, and PCIe Gen4×4 endpoint with scatter-gather DMA for seamless integration into server/edge platforms.
+
+\subsection*{Verification Strategy}
+\begin{itemize}
+  \item \textbf{Unit Verification}: UVM testbenches with functional coverage metrics.
+  \item \textbf{System Verification}: Cycle-accurate Python golden model (NumPy) vs. RTL.
+  \item \textbf{Formal Checks}: Key safety and liveness properties via SymbiYosys.
+  \item \textbf{CI/CD Pipeline}: Automated regression in GitHub Actions with Verilator.
+\end{itemize}
+
+\section{Work Breakdown Structure \& Timeline}
+\begin{table}[ht]
+  \centering
+  \caption{Phases, Milestones \& Duration}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Phase & Description & Duration (weeks) \\
+    \midrule
+    1 & Requirements \& Architecture   & 2 \\
+    2 & Microarchitecture \& Spec       & 3 \\
+    3 & RTL Implementation \& Unit Test & 6 \\
+    4 & Integration \& System Test      & 4 \\
+    5 & Synthesis \& Timing Closure     & 3 \\
+    6 & FPGA Prototyping \& SW Bring-up & 4 \\
+    7 & ASIC Finalization \& Tape-Out   & 6 \\
+    8 & Documentation \& Handoff        & 2 \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:timeline}
+\end{table}
+
+\section{Risk Management}
+\begin{itemize}
+  \item \textbf{Schedule Overruns}: 15\% buffer in Phases 3–6.
+  \item \textbf{Integration Issues}: Bi-weekly cross-team syncs; live hardware-in-the-loop demos.
+  \item \textbf{Verification Gaps}: Traceability matrix mapping requirements → RTL → tests → formal checks.
+\end{itemize}
+
+\section{Budget \& Resource Allocation}
+\begin{table}[ht]
+  \centering
+  \caption{Detailed Budget}
+  \begin{tabular}{@{}lrrr@{}}
+    \toprule
+    Item & Unit Cost & Qty & Total (USD) \\
+    \midrule
+    FPGA Dev Board           & \$1,500 & 1   & \$1,500  \\
+    Software Licenses        & \$2,000 & 1   & \$2,000  \\
+    Test Equipment           & \$5,000 & 1   & \$5,000  \\
+    Engineering Labor (600 h \@ \$50/h) & \$50 & 600 & \$30,000 \\
+    Contingency (15\%)       & —       & —   & \$5,625  \\
+    \midrule
+    \textbf{Total}           &         &     & \textbf{\$44,125} \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:budget}
+\end{table}
+
+\section{Deliverables \& Evaluation Metrics}
+\begin{itemize}
+  \item \textbf{IP Package}: RTL source, synthesis scripts, gate-level netlist.
+  \item \textbf{FPGA Bitstream} \& Board Guide.
+  \item \textbf{Software Stack}: Kernel module, user-space SDK, demo apps.
+  \item \textbf{Verification Reports}: Coverage dashboards, formal proof summaries.
+  \item \textbf{Performance Report}: Latency, throughput, power benchmarks vs. target KPIs.
+\end{itemize}
+
+\section*{Conclusion}
+By executing this forward-looking, zero-tolerance strategy, we will deliver a market-ready, domain-specific AI inference accelerator that unlocks new performance and efficiency thresholds. This IP will be a cornerstone asset for next-generation embedded and data-center platforms, driving measurable ROI and strategic differentiation.
+
+\begin{thebibliography}{9}
+\bibitem{uvm} Accellera Systems Initiative, “UVM 1.2 User Guide,” 2020.
+\bibitem{symbiyosys} Yosys HQ, “SymbiYosys Formal Verification Suite,” 2024.
+\bibitem{resnet} K. He et al., “Deep Residual Learning for Image Recognition,” CVPR, 2016.
+\end{thebibliography}
+
+\end{document}
