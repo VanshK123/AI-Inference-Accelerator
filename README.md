@@ -271,27 +271,27 @@ AI-Inference-Accelerator/
 
 ### Hardware Features
 
-✅ **Parameterizable 16×16 INT8 MAC array** with systolic dataflow  
-✅ **Hierarchical BRAM scratchpad** with dual-bank interleaving  
-✅ **AXI4-Lite control plane** for register access  
-✅ **AXI4-Stream data plane** for high-bandwidth transfers  
-✅ **PCIe Gen3×4 endpoint** with scatter-gather DMA  
-✅ **Optimized tile processing** for cache-resident compute  
-✅ **Column-major addressing** for efficient memory access  
+1. **Parameterizable 16×16 INT8 MAC array** with systolic dataflow  
+2. **Hierarchical BRAM scratchpad** with dual-bank interleaving  
+3. **AXI4-Lite control plane** for register access  
+4. **AXI4-Stream data plane** for high-bandwidth transfers  
+5. **PCIe Gen3×4 endpoint** with scatter-gather DMA  
+6. **Optimized tile processing** for cache-resident compute  
+7. **Column-major addressing** for efficient memory access  
 
 ### Verification Features
 
-✅ **UVM testbench** with 90% functional coverage  
-✅ **SymbiYosys formal verification** with 40+ assertions  
-✅ **Python golden model** for cycle-accurate validation  
-✅ **15+ network topologies** tested  
-✅ **Automated CI/CD pipeline** with <25 min runtime  
+1 **UVM testbench** with 90% functional coverage  
+2. **SymbiYosys formal verification** with 40+ assertions  
+3. **Python golden model** for cycle-accurate validation  
+4. **15+ network topologies** tested  
+5. **Automated CI/CD pipeline** with <25 min runtime  
 
 ### Performance Features
 
-✅ **100 FPS** ResNet-18 inference throughput  
-✅ **10 ms** end-to-end latency  
-✅ **3.5× speedup** over ARM CPU baseline  
-✅ **1.2 TOPS/W** power efficiency  
-✅ **4 GB/s** memory throughput  
-✅ **<1 µs** transfer latency  
+1. **100 FPS** ResNet-18 inference throughput  
+2. **10 ms** end-to-end latency  
+3. **3.5× speedup** over ARM CPU baseline  
+4. **1.2 TOPS/W** power efficiency  
+5. **4 GB/s** memory throughput  
+6. **<1 µs** transfer latency  
