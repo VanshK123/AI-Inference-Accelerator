@@ -267,15 +267,6 @@ AI-Inference-Accelerator/
 
 ---
 
-## Documentation
-
-- **[Architecture Guide](docs/architecture.md)** - Detailed hardware architecture
-- **[API Reference](docs/api_reference.md)** - Software API documentation
-- **[User Guide](docs/user_guide.md)** - End-to-end usage guide
-- **[Verification Plan](docs/verification_plan.md)** - Verification methodology
-
----
-
 ## Key Features
 
 ### Hardware Features
